@@ -3,8 +3,46 @@ const logger = require('../utils/logger');
 
 let redis = null;
 
+const parseBooleanEnv = (value) => {
+  if (value === undefined || value === null) return undefined;
+  const normalized = String(value).trim().toLowerCase();
+  if (['1', 'true', 'yes', 'y', 'on'].includes(normalized)) return true;
+  if (['0', 'false', 'no', 'n', 'off'].includes(normalized)) return false;
+  return undefined;
+};
+
+const isRedisEnabled = () => {
+  const explicit = parseBooleanEnv(process.env.REDIS_ENABLED);
+  if (explicit !== undefined) return explicit;
+  return process.env.NODE_ENV === 'production';
+};
+
+const getRedisProvider = () => {
+  const provider = String(process.env.REDIS_PROVIDER || '').trim().toLowerCase();
+  if (provider) return provider;
+  if (process.env.UPSTASH_REDIS_URL || process.env.UPSTASH_REDIS_HOST) return 'upstash';
+  if (process.env.ELASTICACHE_REDIS_URL || process.env.ELASTICACHE_REDIS_HOST) return 'elasticache';
+  return 'local';
+};
+
 const connectRedis = () => {
   try {
+    if (!isRedisEnabled()) {
+      logger.info('Redis disabled (set REDIS_ENABLED=true to enable)');
+      redis = null;
+      return null;
+    }
+
+    const provider = getRedisProvider();
+    if (provider === 'upstash') {
+      const { connectUpstashRedis } = require('./upstashRedis');
+      return connectUpstashRedis();
+    }
+    if (provider === 'elasticache') {
+      const { connectElastiCacheRedis } = require('./elasticacheRedis');
+      return connectElastiCacheRedis();
+    }
+
     redis = new Redis(process.env.REDIS_URL || 'redis://localhost:6379', {
       retryStrategy: (times) => {
         const delay = Math.min(times * 50, 2000);
@@ -29,6 +67,16 @@ const connectRedis = () => {
 };
 
 const getRedis = () => {
+  const provider = getRedisProvider();
+  if (provider === 'upstash') {
+    const { getUpstashRedis } = require('./upstashRedis');
+    return getUpstashRedis();
+  }
+  if (provider === 'elasticache') {
+    const { getElastiCacheRedis } = require('./elasticacheRedis');
+    return getElastiCacheRedis();
+  }
+
   if (!redis) {
     return connectRedis();
   }
