@@ -733,7 +733,6 @@ export default function Dashboard() {
       title: 'Total Views',
       value: formatNumber(overview?.performance?.views || 0),
       change: calculateChange(
-        overview?.performance?.views || 0,
         overview?.trends?.viewsChange || 0
       ),
       trend: (overview?.trends?.viewsChange || 0) >= 0 ? 'up' : 'down',
@@ -745,7 +744,6 @@ export default function Dashboard() {
       value: overview?.performance?.engagement ? 
         `${overview.performance.engagement.toFixed(1)}%` : '0%',
       change: calculateChange(
-        overview?.performance?.engagement || 0,
         overview?.trends?.engagementChange || 0
       ),
       trend: (overview?.trends?.engagementChange || 0) >= 0 ? 'up' : 'down',

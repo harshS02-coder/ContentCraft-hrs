@@ -425,13 +425,11 @@
 //   );
 // }
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { TrendingUp, Zap, Search, Filter, Loader2, Sparkles } from 'lucide-react';
+import { TrendingUp, Loader2, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { trendsApi, aiApi } from '@/services/api';
+import { trendsApi } from '@/services/api';
 import { useToast } from '@/hooks/use-toast';
 
 export default function TrendDashboard() {
@@ -463,7 +461,7 @@ export default function TrendDashboard() {
   const generateContentFromTrend = async (trend: any) => {
     try {
       setGenerating(trend._id);
-      const response = await trendsApi.generateContent(
+      await trendsApi.generateContent(
         trend._id,
         'twitter',
         {}
