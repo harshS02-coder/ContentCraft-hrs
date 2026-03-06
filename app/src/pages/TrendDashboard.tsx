@@ -425,6 +425,7 @@
 //   );
 // }
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import { TrendingUp, Loader2, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
