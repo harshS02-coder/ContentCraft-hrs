@@ -426,9 +426,9 @@
 // }
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { TrendingUp, Loader2, Sparkles } from 'lucide-react';
+import { TrendingUp, Loader2, Sparkles, Heart, MessageCircle, Share2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { trendsApi } from '@/services/api';
 import { useToast } from '@/hooks/use-toast';
@@ -575,6 +575,133 @@ export default function TrendDashboard() {
             </Card>
           </motion.div>
         ))}
+      </div>
+
+      {/* Platform-Specific Trends Section */}
+      <div className="mt-12">
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">Trends by Platform-Future Scope</h2>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Instagram Trends */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
+          >
+            <Card className="bg-gradient-to-br from-pink-50 to-orange-50 border-pink-200 hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <span className="text-2xl"></span>
+                  Instagram Trends
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="space-y-3">
+                  {[
+                    { name: '#ReelsChallenge', engagement: '2.4M', growth: '+87%' },
+                    { name: '#EditAesthetic', engagement: '1.8M', growth: '+65%' },
+                    { name: '#ContentCreator', engagement: '1.5M', growth: '+52%' },
+                  ].map((trend, idx) => (
+                    <div key={idx} className="p-3 bg-white rounded-lg">
+                      <div className="flex items-center justify-between mb-2">
+                        <p className="font-semibold text-gray-900">{trend.name}</p>
+                        <Badge className="bg-pink-500">{trend.growth}</Badge>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-gray-600">
+                        <Heart className="w-4 h-4 text-pink-500" />
+                        <span>{trend.engagement} interactions</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <Button className="w-full bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600" onClick={() => generateContentFromTrend({ keyword: 'Instagram Trends', _id: 'instagram-trends' })}>
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  Use for Instagram
+                </Button>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          {/* Twitter Trends */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0.2 }}
+          >
+            <Card className="bg-gradient-to-br from-blue-50 to-cyan-50 border-blue-200 hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <span className="text-2xl"></span>
+                  Twitter Trends
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="space-y-3">
+                  {[
+                    { name: '#TechNews', engagement: '3.2M', growth: '+124%' },
+                    { name: '#AI2025', engagement: '2.9M', growth: '+98%' },
+                    { name: '#StartupLife', engagement: '2.1M', growth: '+76%' },
+                  ].map((trend, idx) => (
+                    <div key={idx} className="p-3 bg-white rounded-lg">
+                      <div className="flex items-center justify-between mb-2">
+                        <p className="font-semibold text-gray-900">{trend.name}</p>
+                        <Badge className="bg-blue-500">{trend.growth}</Badge>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-gray-600">
+                        <MessageCircle className="w-4 h-4 text-blue-500" />
+                        <span>{trend.engagement} conversations</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <Button className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600" onClick={() => generateContentFromTrend({ keyword: 'Twitter Trends', _id: 'twitter-trends' })}>
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  Use for Twitter
+                </Button>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          {/* YouTube Trends */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0.3 }}
+          >
+            <Card className="bg-gradient-to-br from-red-50 to-orange-50 border-red-200 hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <span className="text-2xl"></span>
+                  YouTube Trends
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="space-y-3">
+                  {[
+                    { name: 'Top 10 Gadgets', engagement: '4.5M', growth: '+156%' },
+                    { name: 'AI Explained', engagement: '3.8M', growth: '+112%' },
+                    { name: 'Shorts Viral', engagement: '2.7M', growth: '+89%' },
+                  ].map((trend, idx) => (
+                    <div key={idx} className="p-3 bg-white rounded-lg">
+                      <div className="flex items-center justify-between mb-2">
+                        <p className="font-semibold text-gray-900">{trend.name}</p>
+                        <Badge className="bg-red-500">{trend.growth}</Badge>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-gray-600">
+                        <Share2 className="w-4 h-4 text-red-500" />
+                        <span>{trend.engagement} views</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <Button className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600" onClick={() => generateContentFromTrend({ keyword: 'YouTube Trends', _id: 'youtube-trends' })}>
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  Use for YouTube
+                </Button>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
       </div>
     </div>
   );
