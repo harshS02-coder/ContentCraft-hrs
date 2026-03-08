@@ -232,7 +232,7 @@ export default function LandingPage() {
               className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 rounded-full mb-8"
             >
               <Sparkles className="w-4 h-4 text-purple-600" />
-              <span className="text-sm font-medium text-purple-700">Powered by Gemini & DALL-E 3</span>
+              <span className="text-sm font-medium text-purple-700">Powered by Meta Llama-3 & Amazon Titan</span>
             </motion.div>
             
             {/* Headline */}

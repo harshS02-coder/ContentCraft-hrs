@@ -427,6 +427,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { TrendingUp, Loader2, Sparkles, Heart, MessageCircle, Share2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -438,6 +439,7 @@ export default function TrendDashboard() {
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState<string | null>(null);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchTrends();
@@ -614,7 +616,7 @@ export default function TrendDashboard() {
                     </div>
                   ))}
                 </div>
-                <Button className="w-full bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600" onClick={() => generateContentFromTrend({ keyword: 'Instagram Trends', _id: 'instagram-trends' })}>
+                <Button className="w-full bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600" onClick={() => navigate('/settings')}>
                   <Sparkles className="w-4 h-4 mr-2" />
                   Use for Instagram
                 </Button>
@@ -654,7 +656,7 @@ export default function TrendDashboard() {
                     </div>
                   ))}
                 </div>
-                <Button className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600" onClick={() => generateContentFromTrend({ keyword: 'Twitter Trends', _id: 'twitter-trends' })}>
+                <Button className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600" onClick={() => navigate('/settings')}>
                   <Sparkles className="w-4 h-4 mr-2" />
                   Use for Twitter
                 </Button>
@@ -694,7 +696,7 @@ export default function TrendDashboard() {
                     </div>
                   ))}
                 </div>
-                <Button className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600" onClick={() => generateContentFromTrend({ keyword: 'YouTube Trends', _id: 'youtube-trends' })}>
+                <Button className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600" onClick={() => navigate('/settings')}>
                   <Sparkles className="w-4 h-4 mr-2" />
                   Use for YouTube
                 </Button>
