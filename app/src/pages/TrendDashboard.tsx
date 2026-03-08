@@ -487,6 +487,14 @@ export default function TrendDashboard() {
     }
   };
 
+  const redirectToSettingsWithMessage = () => {
+    toast({
+      title: 'Add your account',
+      description: 'Connect your social account in Settings to continue.',
+    });
+    navigate('/settings');
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -616,7 +624,7 @@ export default function TrendDashboard() {
                     </div>
                   ))}
                 </div>
-                <Button className="w-full bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600" onClick={() => navigate('/settings')}>
+                <Button className="w-full bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600" onClick={redirectToSettingsWithMessage}>
                   <Sparkles className="w-4 h-4 mr-2" />
                   Use for Instagram
                 </Button>
@@ -656,7 +664,7 @@ export default function TrendDashboard() {
                     </div>
                   ))}
                 </div>
-                <Button className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600" onClick={() => navigate('/settings')}>
+                <Button className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600" onClick={redirectToSettingsWithMessage}>
                   <Sparkles className="w-4 h-4 mr-2" />
                   Use for Twitter
                 </Button>
@@ -696,7 +704,7 @@ export default function TrendDashboard() {
                     </div>
                   ))}
                 </div>
-                <Button className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600" onClick={() => navigate('/settings')}>
+                <Button className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600" onClick={redirectToSettingsWithMessage}>
                   <Sparkles className="w-4 h-4 mr-2" />
                   Use for YouTube
                 </Button>
